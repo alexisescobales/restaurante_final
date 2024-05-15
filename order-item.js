@@ -1,14 +1,14 @@
 // order-item.js
 class OrderItem extends HTMLElement {
-  static get observedAttributes() {
-      return ['name', 'price', 'img'];
-  }
+    static get observedAttributes() {
+        return ['name', 'price', 'img'];
+    }
 
-  constructor() {
-      super();
-      this.attachShadow({ mode: 'open' });
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
 
-      this.shadowRoot.innerHTML = `
+        this.shadowRoot.innerHTML = `
           <style>
               .order-item {
                   display: flex;
@@ -35,47 +35,48 @@ class OrderItem extends HTMLElement {
           </div>
       `;
 
-      this.quantity = 1;
-      this.price = 0;
+      //Cantidad siempre sumara de 1 en 1
+        this.quantity = 1;
 
-      this.shadowRoot.querySelector('.add').addEventListener('click', () => this.updateQuantity(1));
-      this.shadowRoot.querySelector('.remove').addEventListener('click', () => this.updateQuantity(-1));
-  }
+        //Precio inicializado
+        this.price = 0;
 
-  attributeChangedCallback(name, oldValue, newValue) {
-      if (name === 'name') {
-          this.shadowRoot.getElementById('name').textContent = newValue;
-      } else if (name === 'price') {
-          this.price = parseFloat(newValue);
-          this.shadowRoot.getElementById('price').textContent = this.price.toFixed(2);
-      } else if (name === 'img') {
-          this.shadowRoot.getElementById('img').src = newValue;
-          this.shadowRoot.getElementById('img').alt = newValue;
-      }
-  }
+        //Funcion de sumar
+        this.shadowRoot.querySelector('.add').addEventListener('click', () => this.updateQuantity(1));
+        
+        //Funcion de restar
+        this.shadowRoot.querySelector('.remove').addEventListener('click', () => this.updateQuantity(-1));
+    }
 
-  updateQuantity(amount) {
-      this.quantity += amount;
-      if (this.quantity < 1) {
-          this.remove();
-      } else {
-          this.shadowRoot.querySelector('.quantity').textContent = this.quantity;
-          this.dispatchEvent(new CustomEvent('update-total', {
-              detail: { amount: this.price * amount },
-              bubbles: true,
-              composed: true
-          }));
-      }
-  }
+    //Añade el nombre, precio y img a el div de la cuenta
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'name') {
+            this.shadowRoot.getElementById('name').textContent = newValue;
+        } else if (name === 'price') {
+            this.price = parseFloat(newValue);
+            this.shadowRoot.getElementById('price').textContent = this.price.toFixed(2);
+        } else if (name === 'img') {
+            this.shadowRoot.getElementById('img').src = newValue;
+            this.shadowRoot.getElementById('img').alt = newValue;
+        }
+    }
 
-  remove() {
-      this.dispatchEvent(new CustomEvent('update-total', {
-          detail: { amount: -this.price * this.quantity },
-          bubbles: true,
-          composed: true
-      }));
-      this.parentNode.removeChild(this);
-  }
+    //Suma o resta la cantidad del mismo plato añadidos
+    updateQuantity(amount) {
+        this.quantity += amount;
+        //Lo elimina
+        if (this.quantity < 1) {
+            this.remove();
+        //Lo suma
+        } else {
+            this.shadowRoot.querySelector('.quantity').textContent = this.quantity;
+            this.dispatchEvent(new CustomEvent('update-total', {
+                detail: { amount: this.price * amount },
+                bubbles: true,
+                composed: true
+            }));
+        }
+    }
 }
 
 customElements.define('order-item', OrderItem);
