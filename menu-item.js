@@ -71,7 +71,6 @@ class MenuItem extends HTMLElement {
         } else if (name === 'img') {
             const imgElement = this.shadowRoot.getElementById('img');
             imgElement.src = newValue;
-            imgElement.alt = newValue;
         }
     }
 }

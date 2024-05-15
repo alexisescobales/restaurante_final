@@ -61,14 +61,18 @@ class OrderItem extends HTMLElement {
         }
     }
 
-    //Suma o resta la cantidad del mismo plato añadidos
     updateQuantity(amount) {
         this.quantity += amount;
-        //Lo elimina
-        if (this.quantity < 1) {
+        // Resta el precio del plato del precio total cuando la cantidad llega a cero y luego elimina el plato
+        if (this.quantity === 0) {
+            this.dispatchEvent(new CustomEvent('update-total', {
+                detail: { amount: -this.price },
+                bubbles: true,
+                composed: true
+            }));
             this.remove();
-        //Lo suma
         } else {
+            // Actualiza la cantidad del plato y dispara un evento para actualizar el precio total
             this.shadowRoot.querySelector('.quantity').textContent = this.quantity;
             this.dispatchEvent(new CustomEvent('update-total', {
                 detail: { amount: this.price * amount },
@@ -77,6 +81,7 @@ class OrderItem extends HTMLElement {
             }));
         }
     }
+    
 }
 
 customElements.define('order-item', OrderItem);
