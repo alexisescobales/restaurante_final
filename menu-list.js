@@ -15,11 +15,12 @@ class MenuList extends HTMLElement {
             <style>
                 /* Estilos para las categorías */
                 .category {
-                    margin-bottom: 20px;
+                    margin-bottom: 90px;
+                    text-align: center;
                 }
                 /* Estilos para los encabezados de las categorías */
                 .category h2 {
-                    margin-bottom: 10px;
+                    margin-bottom: 30px;
                 }
                 /* Estilos para los elementos dentro de una categoría */
                 .items {
@@ -31,22 +32,22 @@ class MenuList extends HTMLElement {
             <div class="menu">
                 <!-- Categoría de primeros platos -->
                 <div class="category" id="primers">
-                    <h2>Primers</h2>
+                    <h2>PRIMEROS</h2>
                     <div class="items"></div>
                 </div>
                 <!-- Categoría de segundos platos -->
                 <div class="category" id="segons">
-                    <h2>Segons</h2>
+                    <h2>SEGUNDOS</h2>
                     <div class="items"></div>
                 </div>
                 <!-- Categoría de postres -->
                 <div class="category" id="postres">
-                    <h2>Postres</h2>
+                    <h2>POSTRES</h2>
                     <div class="items"></div>
                 </div>
                 <!-- Categoría de bebidas -->
                 <div class="category" id="begudes">
-                    <h2>Begudes</h2>
+                    <h2>BEBIDAS</h2>
                     <div class="items"></div>
                 </div>
             </div>

@@ -15,32 +15,38 @@ class MenuItem extends HTMLElement {
         // Define la estructura HTML y los estilos
         this.shadowRoot.innerHTML = `
         <style>
-            /* Bootstrap styles */
-            @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
-
-            /* Custom styles */
-            .menu-item {
-                margin-bottom: 20px;
-            }
-            .menu-item img {
-                width: 300px; /* Tamaño personalizado para la imagen */
-                height: 200px; /* Altura automática para mantener la proporción */
-            }
-
-            .card {
-                width: 300px; /* Tamaño personalizado para la imagen */
-                height: auto; /* Altura automática para mantener la proporción */
-            }
-        </style>
-        <div class="card menu-item">
-            <img id="img" class="card-img-top" src="" alt="">
-            <div class="card-body">
-                <h5 class="card-title" id="name"></h5>
-                <p class="card-text">Precio: <span id="price">0.00</span>€</p>
-                <p class="card-text">Alérgenos: <span id="allergens"></span></p>
-                <button class="btn btn-primary">Añadir a la orden</button>
-            </div>
+        /* Bootstrap styles */
+        @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+    
+        /* Custom styles */
+        .menu-item {
+            margin-bottom: 20px;
+        }
+        .menu-item img {
+            width: 300px; /* Tamaño personalizado para la imagen */
+            height: 200px; /* Altura automática para mantener la proporción */
+        }
+    
+        .card {
+            width: 300px; /* Tamaño personalizado para la imagen */
+            height: auto; /* Altura automática para mantener la proporción */
+            margin-left: 50px;
+            border-radius: 40px; /* Borde redondeado */
+        }
+    
+        .card-title {
+            font-weight: bold;
+        }
+    </style>
+    <div class="card menu-item">
+        <img id="img" class="card-img-top" src="" alt="">
+        <div class="card-body">
+            <h5 class="card-title" id="name"></h5>
+            <p class="card-text">Precio: <span id="price">0.00</span>€</p>
+            <p class="card-text">Alérgenos: <span id="allergens"></span></p>
+            <button class="btn btn-primary">Añadir a la cuenta</button>
         </div>
+    </div>    
     `;
 
         // Agrega un event listener al botón
