@@ -1,11 +1,13 @@
-// Importa el archivo menu-item.js donde se define el elemento de menú
+// Importa el archivo menu-item.js
 import './menu-item.js';
 
-// Define una clase llamada MenuList que extiende HTMLElement
+// Clase llamada MenuList que extiende HTMLElement
 class MenuList extends HTMLElement {
-    // Constructor de la clase
+
+    // Constructor
     constructor() {
-        super(); // Llama al constructor de la clase base HTMLElement
+        super(); // Llama al constructor de la clase base
+
         // Adjunta un Shadow DOM al elemento
         this.attachShadow({ mode: 'open' });
 
@@ -13,12 +15,12 @@ class MenuList extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <!-- Estilos personalizados -->
             <style>
-                /* Estilos para las categorías */
+                /* Categorías */
                 .category {
                     margin-bottom: 90px;
                     text-align: center;
                 }
-                /* Estilos para los encabezados de las categorías */
+                /* Encabezados de las categorías */
                 .category h2 {
                     margin-bottom: 30px;
                 }
@@ -28,24 +30,24 @@ class MenuList extends HTMLElement {
                     flex-wrap: wrap;
                 }
             </style>
-            <!-- Estructura HTML de la lista de menú -->
+
             <div class="menu">
-                <!-- Categoría de primeros platos -->
+  
                 <div class="category" id="primers">
                     <h2>PRIMEROS</h2>
                     <div class="items"></div>
                 </div>
-                <!-- Categoría de segundos platos -->
+
                 <div class="category" id="segons">
                     <h2>SEGUNDOS</h2>
                     <div class="items"></div>
                 </div>
-                <!-- Categoría de postres -->
+
                 <div class="category" id="postres">
                     <h2>POSTRES</h2>
                     <div class="items"></div>
                 </div>
-                <!-- Categoría de bebidas -->
+                
                 <div class="category" id="begudes">
                     <h2>BEBIDAS</h2>
                     <div class="items"></div>
@@ -54,12 +56,12 @@ class MenuList extends HTMLElement {
         `;
     }
 
-    // Método que se llama cuando el elemento es insertado en el DOM
+    // Se llama cuando el elemento es insertado en el DOM
     connectedCallback() {
-        this.render(); // Renderiza la lista de menú
+        this.render(); // Renderiza la lista
     }
 
-    // Método para renderizar la lista de menú
+    // Renderizar la lista de menú
     render() {
         // Array de platos con sus detalles
         const plats = [
@@ -92,17 +94,17 @@ class MenuList extends HTMLElement {
         plats.forEach(plat => {
             // Crea un elemento de menú para cada plato
             const menuItem = document.createElement('menu-item');
-            // Establece los atributos del elemento de menú con los detalles del plato
+            // Establece los atributos del elemento
             menuItem.setAttribute('name', plat.name);
             menuItem.setAttribute('price', plat.price);
             menuItem.setAttribute('allergens', plat.allergens);
             menuItem.setAttribute('img', plat.img);
 
-            // Agrega el elemento de menú a la categoría correspondiente dentro del Shadow DOM
+            // Agrega el elemento dentro de la categoría correspondiente dentro del Shadow DOM
             this.shadowRoot.querySelector(`#${plat.category} .items`).appendChild(menuItem);
         });
     }
 }
 
-// Define el nuevo elemento personalizado 'menu-list' y lo asocia con la clase MenuList
+// Define 'menu-list' y lo asocia con la clase MenuList
 customElements.define('menu-list', MenuList);

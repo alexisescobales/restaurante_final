@@ -15,10 +15,9 @@ class MenuItem extends HTMLElement {
         // Define la estructura HTML y los estilos
         this.shadowRoot.innerHTML = `
         <style>
-        /* Bootstrap styles */
+        /* Estilos Bootstrap */
         @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
     
-        /* Custom styles */
         .menu-item {
             margin-bottom: 20px;
         }
@@ -56,16 +55,16 @@ class MenuItem extends HTMLElement {
             const price = this.getAttribute('price');
             const img = this.getAttribute('img');
 
-            // Dispara un evento personalizado 'add-to-order' con la información del elemento
+            // Dispara un evento personalizado 'add-to-order' con la informacion del elemento
             this.dispatchEvent(new CustomEvent('add-to-order', {
                 detail: { name, price, img },
-                bubbles: true, // Permite que el evento se propague hacia arriba en el DOM
-                composed: true // Permite que el evento atraviese los límites de los Shadow DOM
+                bubbles: true, // Se propague hacia arriba en el DOM
+                composed: true // Atraviese los límites de los Shadow DOM
             }));
         });
     }
 
-    // Método que se llama cuando cambian los atributos observados
+    // Se llama cuando cambian los atributos
     attributeChangedCallback(name, oldValue, newValue) {
         // Actualiza el contenido dentro del Shadow DOM según el atributo que cambió
         if (name === 'name') {
@@ -81,5 +80,5 @@ class MenuItem extends HTMLElement {
     }
 }
 
-// Define el nuevo elemento personalizado 'menu-item' y lo asocia con la clase MenuItem
+// Define 'menu-item' y lo asocia con la clase MenuItem
 customElements.define('menu-item', MenuItem);

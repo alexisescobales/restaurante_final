@@ -34,7 +34,7 @@ class OrderList extends HTMLElement {
         this.totalPrice = 0;
     }
 
-    // Método que se llama cuando el elemento es insertado en el DOM
+    // Se llama cuando el elemento es insertado en el DOM
     connectedCallback() {
         // Escucha el evento 'add-to-order' que se dispara cuando se añade un elemento a la orden
         document.addEventListener('add-to-order', (event) => {
@@ -46,11 +46,11 @@ class OrderList extends HTMLElement {
         });
     }
 
-    // Método para agregar un elemento a la orden
+    // Agregar un elemento a la orden
     addOrderItem(detail) {
         const orderItems = this.shadowRoot.getElementById('order-items');
 
-        // Comprueba si el elemento ya está en la orden
+        // Comprueba si el elemento ya esta
         let existingOrderItem = Array.from(orderItems.children).find(item => item.getAttribute('name') === detail.name);
 
         if (existingOrderItem) {
@@ -67,13 +67,13 @@ class OrderList extends HTMLElement {
         this.updateTotal(Number(detail.price)); // Actualiza el total con el precio del nuevo elemento
     }
 
-    // Método para actualizar el total de la orden
+    // Actualizar el total de la orden
     updateTotal(amount) {
-        this.totalPrice += amount; // Añade o resta el monto del nuevo elemento al total
+        this.totalPrice += amount; // Añade o resta la cantidad del nuevo elemento al total
         // Actualiza el texto del total en el DOM
         this.shadowRoot.getElementById('total-price').textContent = this.totalPrice.toFixed(2);
     }
 }
 
-// Define el nuevo elemento personalizado 'order-list' y lo asocia con la clase OrderList
+// Define 'order-list' y lo asocia con la clase OrderList
 customElements.define('order-list', OrderList);
